@@ -4,21 +4,21 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Editar Gênero</title>
+        <title>Editar Livro</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     </head>
     <body>
         <main class="container">
-            <h1>Editar Gênero</h1>
+            <h1>Editar Livro</h1>
             <hr />
-            <form action="/genero/update" method="post">
-                <input type="hidden" name="id" value="${genero.id}" />
+            <form action="/livro/update" method="post">
+                <input type="hidden" name="id" value="${livro.id}" />
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" name="nome" value="${genero.nome}" />
+                    <label for="titulo">Titulo:</label>
+                    <input type="text" name="titulo" value="${livro.titulo}" />
                 </div>
                 <hr />
-                <a href="/genero/list" class="btn btn-primary">Voltar</a>
+                <a href="/livro/list" class="btn btn-primary">Voltar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </form>
         </main>
