@@ -2,3 +2,6 @@ image: gitpod/workspace-mysql
 
 tasks:
   - init: mysql -u root -e "CREATE DATABASE applicationdb"
+vscode:
+  extensions:
+    - redhat.java@0.79.0:814090de87ec5877cd50e83b69133d4b
