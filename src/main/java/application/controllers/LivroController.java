@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import application.models.Livro;
-import application.respositories.LivroRepository;
+import application.repositories.GeneroRepository;
+import application.repositories.LivroRepository;
 
 @Controller
 @RequestMapping("/livro")
 public class LivroController {
     @Autowired
     private LivroRepository livroRepo;
+    @Autowired
+    private GeneroRepository generoRepo;
 
     @RequestMapping("/list")
     public String list(Model model) {
@@ -26,14 +29,16 @@ public class LivroController {
     }
 
     @RequestMapping("/insert")
-    public String formInsert() {
+    public String formInsert(Model model) {
+        model.addAttribute("generos", generoRepo.findAll());
         return "insert.jsp";
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String saveInsert(@RequestParam("titulo") String titulo) {
+    public String saveInsert(@RequestParam("titulo") String titulo, @RequestParam("genero") int generoId) {
         Livro livro = new Livro();
         livro.setTitulo(titulo);
+        livro.setGenero(generoRepo.findById(generoId).get());
 
         livroRepo.save(livro);
 
@@ -46,15 +51,17 @@ public class LivroController {
         if(!livro.isPresent())
             return "redirect:/livro/list";
         model.addAttribute("livro", livro.get());
+        model.addAttribute("generos", generoRepo.findAll());
         return "/livro/update.jsp";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String saveUpdate(@RequestParam("titulo") String titulo, @RequestParam("id") int id) {
+    public String saveUpdate(@RequestParam("titulo") String titulo, @RequestParam("id") int id, @RequestParam("genero") int generoId) {
         Optional<Livro> livro = livroRepo.findById(id);
         if(!livro.isPresent())
             return "redirect:/livro/list";
         livro.get().setTitulo(titulo);
+        livro.get().setGenero(generoRepo.findById(generoId).get());
 
         livroRepo.save(livro.get());
 

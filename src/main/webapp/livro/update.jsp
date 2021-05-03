@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -16,6 +17,14 @@
                 <div class="form-group">
                     <label for="titulo">Titulo:</label>
                     <input type="text" name="titulo" value="${livro.titulo}" />
+                </div>
+                <div class="form-group">
+                    <label for="genero">Gênero:</label>
+                    <select name="genero" class="form-control">
+                        <c:forEach var="g" items="${generos}">
+                            <option ${livro.genero.id == g.id ? "selected" : ""} value="${g.id}">${g.nome}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <hr />
                 <a href="/livro/list" class="btn btn-primary">Voltar</a>

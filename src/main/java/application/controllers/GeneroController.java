@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import application.models.Genero;
-import application.respositories.GeneroRepository;
+import application.repositories.GeneroRepository;
 
 @Controller
 @RequestMapping("/genero")
