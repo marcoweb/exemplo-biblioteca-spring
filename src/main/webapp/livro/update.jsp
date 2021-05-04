@@ -26,6 +26,14 @@
                         </c:forEach>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="autor">Autor:</label>
+                    <select name="autor" class="form-control">
+                        <c:forEach var="a" items="${autores}">
+                            <option ${livro.autor.id == a.id ? "selected" : ""} value="${a.id}">${a.nome}</option>
+                        </c:forEach>
+                    </select>
+                </div>
                 <hr />
                 <a href="/livro/list" class="btn btn-primary">Voltar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />

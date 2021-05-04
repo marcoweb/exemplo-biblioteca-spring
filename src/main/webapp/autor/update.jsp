@@ -1,40 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Novo Livro</title>
+        <title>Editar Autor</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     </head>
     <body>
         <main class="container">
-            <h1>Novo Livro</h1>
+            <h1>Editar Autor</h1>
             <hr />
-            <form action="insert" method="post">
+            <form action="/autor/update" method="post">
+                <input type="hidden" name="id" value="${autor.id}" />
                 <div class="form-group">
-                    <label for="titulo">Título:</label>
-                    <input type="text" name="titulo" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="genero">Gênero:</label>
-                    <select name="genero" class="form-control">
-                        <c:forEach var="g" items="${generos}">
-                            <option value="${g.id}">${g.nome}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="autor">Autor:</label>
-                    <select name="autor" class="form-control">
-                        <c:forEach var="a" items="${autores}">
-                            <option value="${a.id}">${a.nome}</option>
-                        </c:forEach>
-                    </select>
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" value="${autor.nome}" />
                 </div>
                 <hr />
-                <a href="/titulo/list" class="btn btn-primary">Voltar</a>
+                <a href="/autor/list" class="btn btn-primary">Voltar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </form>
         </main>

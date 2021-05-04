@@ -20,6 +20,10 @@ public class Livro {
     @JoinColumn(name="id_genero")
     private Genero genero;
 
+    @ManyToOne
+    @JoinColumn(name="id_autor")
+    private Autor autor;
+
     public void setId(int id) {
         this.id = id;
     }
@@ -39,5 +43,11 @@ public class Livro {
     }
     public Genero getGenero() {
         return this.genero;
+    }
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+    public Autor getAutor() {
+        return this.autor;
     }
 }

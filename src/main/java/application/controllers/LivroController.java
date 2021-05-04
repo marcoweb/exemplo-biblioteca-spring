@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import application.models.Livro;
 import application.repositories.GeneroRepository;
 import application.repositories.LivroRepository;
+import application.repositories.AutorRepository;
 
 @Controller
 @RequestMapping("/livro")
@@ -21,6 +22,8 @@ public class LivroController {
     private LivroRepository livroRepo;
     @Autowired
     private GeneroRepository generoRepo;
+    @Autowired
+    private AutorRepository autorRepo;
 
     @RequestMapping("/list")
     public String list(Model model) {
@@ -31,14 +34,16 @@ public class LivroController {
     @RequestMapping("/insert")
     public String formInsert(Model model) {
         model.addAttribute("generos", generoRepo.findAll());
+        model.addAttribute("autores", autorRepo.findAll());
         return "insert.jsp";
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String saveInsert(@RequestParam("titulo") String titulo, @RequestParam("genero") int generoId) {
+    public String saveInsert(@RequestParam("titulo") String titulo, @RequestParam("genero") int generoId, @RequestParam("autor") int autorId) {
         Livro livro = new Livro();
         livro.setTitulo(titulo);
         livro.setGenero(generoRepo.findById(generoId).get());
+        livro.setAutor(autorRepo.findById(autorId).get());
 
         livroRepo.save(livro);
 
@@ -52,16 +57,18 @@ public class LivroController {
             return "redirect:/livro/list";
         model.addAttribute("livro", livro.get());
         model.addAttribute("generos", generoRepo.findAll());
+        model.addAttribute("autores", autorRepo.findAll());
         return "/livro/update.jsp";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String saveUpdate(@RequestParam("titulo") String titulo, @RequestParam("id") int id, @RequestParam("genero") int generoId) {
+    public String saveUpdate(@RequestParam("titulo") String titulo, @RequestParam("id") int id, @RequestParam("genero") int generoId, @RequestParam("autor") int autorId) {
         Optional<Livro> livro = livroRepo.findById(id);
         if(!livro.isPresent())
             return "redirect:/livro/list";
         livro.get().setTitulo(titulo);
         livro.get().setGenero(generoRepo.findById(generoId).get());
+        livro.get().setAutor(autorRepo.findById(autorId).get());
 
         livroRepo.save(livro.get());
 
