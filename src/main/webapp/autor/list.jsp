@@ -28,7 +28,9 @@
                             <td>${a.nome}</td>
                             <td>
                                 <a href="/autor/update/${a.id}" class="btn btn-primary">Editar</a>
-                                <a href="/autor/delete/${a.id}" class="btn btn-danger">Remover</a>
+                                <c:if test="${a.livros.size() == 0}">
+                                    <a href="/autor/delete/${a.id}" class="btn btn-danger">Remover</a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
